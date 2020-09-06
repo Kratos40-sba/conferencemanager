@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <link th:href="@{/main.css}" type="text/css" rel="stylesheet" />
+    <title>Edit Profile</title>
+</head>
+<body>
+<div th:insert="menu"></div>
+<div class="main">
+    <div th:insert="header"></div>
+    <form th:action="@{/profile-edit}" th:object="${user}" method="post">
+    <table border="1" width="90%" align="center" cellpadding="5">
+        <tr>
+            <td class="fheading"  colspan="4">Informations Form</td>
+        </tr>
+        <tr>
+            <td>First Name</td>
+            <td>
+                <input type="text" th:field="*{fName}" required/>
+            </td>
+        </tr>
+        <tr>
+            <td>Last Name</td>
+            <td>
+                <input type="text" th:field="*{lName}" required/>
+            </td>
+        </tr>
+        <tr>
+            <td>Email</td>
+            <td>
+                <input type="text" th:field="*{email}" required/>
+            </td>
+        </tr>
+        <tr>
+            <td>Password</td>
+            <td>
+                <input type="password" th:field="*{password}" required/>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4" align="center">
+                <button>Save</button>
+            </td>
+        </tr>
+    </table>
+    </form>
+</div>
+</body>
+</html>

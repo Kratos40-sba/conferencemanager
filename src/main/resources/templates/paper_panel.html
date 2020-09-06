@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <link th:href="@{/main.css}" type="text/css" rel="stylesheet" />
+    <title>Conference Managment</title>
+</head>
+<body>
+<div th:insert="menu"></div>
+<div class="main">
+    <div th:insert="header"></div>
+
+    <form action="#" th:action="@{'/author/create-paper/'+${conference.id}}" th:object="${paper}" method="post" enctype="multipart/form-data">
+        <table border="1" width="90%" align="center" cellpadding="5">
+            <tr>
+                <td class="fheading"  colspan="4">Paper Form</td>
+            </tr>
+            <tr>
+                <td>Paper Title</td>
+                <td>
+                    <input type="text" th:field="*{titre}" required/>
+                </td>
+            </tr>
+            <tr>
+                <td>Abstraction</td>
+                <td colspan="3">
+                    <textarea th:field="*{abstraction}"  title="description" cols="60" rows="4" required></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td>Paper File</td>
+                <td>
+                    <input type="file" name="file"  required />
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="4" align="center">
+                    <button>Save</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+    <br/>
+    <table border="1" width="90%" align="center" cellpadding="5">
+        <tr>
+            <th>ID</th>
+            <th>Paper Title</th>
+            <th>Paper Abstraction</th>
+            <th>Paper Status</th>
+           <th>Reviewing Status</th>
+            <th>Paper Submission Date</th>
+            <th>ACTION</th>
+        </tr>
+        <tr th:each="paper: ${papers}">
+            <td th:text="${paper.id}"></td>
+            <td th:text="${paper.titre}"></td>
+            <td th:text="${paper.abstraction}"></td>
+            <td th:text="${paper.status ? 'Accepted':'In-progress'}"></td>
+            <td th:text="${paper.reviewed ? 'Reviewed':'Not reviewed yet'}"></td>
+            <td th:text="${paper.subb_date}"></td>
+            <td> <a th:href="@{/}">Delete</a>|<a th:href="${'/download-file/'+paper.id}">Download File</a>
+            </td>
+        </tr>
+    </table>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <link th:href="@{/main.css}" type="text/css" rel="stylesheet" />
+    <title>Paper-Detail</title>
+</head>
+<body>
+<div th:insert="menu"></div>
+<div class="main">
+    <div th:insert="header"></div>
+    <table border="1" width="90%" align="center" cellpadding="5">
+        <tr>
+            <td class="fheading"  colspan="4">Paper Informations</td>
+        </tr>
+        <tr>
+            <td>Paper ID</td>
+            <td th:text="${paper.id}">
+            </td>
+        </tr>
+        <tr>
+            <td>Paper Title</td>
+            <td th:text="${paper.titre}">
+            </td>
+        </tr>
+        <tr>
+            <td>Paper Abstraction</td>
+            <td th:text="${paper.abstraction}">
+            </td>
+        </tr>
+        <tr>
+            <td>Paper Submitting Date</td>
+            <td th:text="${paper.subb_date}">
+            </td>
+        </tr>
+        <tr>
+            <td>Paper Status</td>
+            <td th:text="${paper.status ? 'Accepted':'In-Progress'}">
+            </td>
+        </tr>
+        <tr>
+            <td>Reviewing Status</td>
+            <td th:text="${paper.reviewed ? 'Reviewed':'Not reviewed yet'}">
+            </td>
+        </tr>
+        <tr>
+            <td>Author</td>
+            <td th:text="${author}">
+            </td>
+        </tr>
+        <tr>
+            <td>Conference</td>
+            <td th:text="${conference}">
+            </td>
+        </tr>
+    </table>
+    <table border="1" width="90%" align="center" cellpadding="5">
+        <tr>
+            <td class="fheading"  colspan="6">Paper-Reviews</td>
+        </tr>
+        <tr>
+            <th>ID</th>
+            <th>Date of Review</th>
+            <th>Review Mark</th>
+            <th>Review Coment</th>
+            <th>Reviewer Email</th>
+            <th>ACTION</th>
+        </tr>
+        <tr th:each="review: ${reviews}">
+            <td th:text="${review.id}"></td>
+            <td th:text="${review.reviewDate}"></td>
+            <td th:text="${review.mark}"></td>
+            <td th:text="${review.comment}"></td>
+            <td th:text="${review.reviewer.email}"></td>
+            <td> <a th:href=@{/}>Accept paper</a>|<a th:href="@{/}">Delete Paper</a>
+            </td>
+        </tr>
+    </table>
+
+</div>
+</body>
+</html>

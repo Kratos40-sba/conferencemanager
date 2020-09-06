@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <link th:href="@{/main.css}" type="text/css" rel="stylesheet" />
+    <title>Conference List</title>
+</head>
+<body>
+<div th:insert="menu"></div>
+<div class="main">
+    <div th:insert="header"></div>
+    <table border="1" width="90%" align="center" cellpadding="5">
+        <tr>
+            <th>Conference Title</th>
+            <th>Conference Category</th>
+            <th>Conference Descreption</th>
+            <th>Conference Status</th>
+            <th>Submitting papers Start in</th>
+            <th>Submitting papers End in</th>
+            <th>ACTION</th>
+        </tr>
+        <tr th:each="conference: ${conferences}">
+            <td th:text="${conference.titre}"></td>
+            <td th:text="${conference.topic}"></td>
+            <td th:text="${conference.descreption}"></td>
+            <td th:text="${conference.opend ? 'Open':'Closed'}"></td>
+            <td th:text="${conference.start}"></td>
+            <td th:text="${conference.end}"></td>
+            <td><a th:href="${'/author/create-paper/'+conference.id}">Submit Paper</a>|<a th:href="@{/}">View Papers</a>|<a th:href="@{/}">View Schedule</a>
+            </td>
+        </tr>
+    </table>
+
+</div>
+</body>
+</html>

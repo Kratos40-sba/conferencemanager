@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <link th:href="@{/main.css}" type="text/css" rel="stylesheet" />
+    <title>Login</title>
+</head>
+<body>
+<div class="main" align="center">
+    <div th:insert="header"></div>
+    <div class="txt_small"> Login</div>
+    <form   th:action="@{/auth/login}"  method="post">
+        <input  name="username" placeholder="Email" type="email" required><br><br>
+        <input name="password" placeholder="Mot de passe" type="password" required><br><br>
+        <button type="submit">Valider</button>
+    </form >
+</div>
+</body>
+</html>

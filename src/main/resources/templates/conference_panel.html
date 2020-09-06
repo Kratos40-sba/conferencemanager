@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <link th:href="@{/main.css}" type="text/css" rel="stylesheet" />
+    <title>Conference Managment</title>
+</head>
+<body>
+<div th:insert="menu"></div>
+<div class="main">
+    <div th:insert="header"></div>
+
+    <form th:action="@{/admin/create-conference}" th:object="${conference}" method="post">
+        <table border="1" width="90%" align="center" cellpadding="5">
+            <tr>
+                <td class="fheading"  colspan="4">Conference Form</td>
+            </tr>
+            <tr>
+                <td>Conference Title</td>
+                <td>
+                    <input type="text" th:field="*{titre}" required/>
+                </td>
+            </tr>
+            <tr>
+                <td>Topic/Category</td>
+                <td>
+                    <select  th:field="*{topic}" required>
+                        <option value="">Choose...</option>
+                        <option value="Data_Science">Data Science</option>
+                        <option value="Networks">Networks</option>
+                        <option value="Big_Data">Big Data</option>
+                        <option value="Software_Engineering">Software Engineering</option>
+                    </select>
+                </td>
+
+            </tr>
+
+
+            <tr>
+                <td>Descreption / Abstraction</td>
+                <td colspan="3">
+                    <textarea th:field="*{descreption}" placeholder="Subject , Location , aditional informations" title="description" cols="60" rows="3" required></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td>Conference Start_Day</td>
+                <td>
+                    <input type="datetime-local" th:field="*{start}" required/>
+                </td>
+            </tr>
+            <tr>
+                <td>Conference End_Day</td>
+                <td>
+                    <input type="datetime-local" th:field="*{end}" required/>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4" align="center">
+                    <button>Save</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+    <br/>
+    <table border="1" width="90%" align="center" cellpadding="5">
+        <tr>
+            <th>ID</th>
+            <th>Conference Title</th>
+            <th>Conference Category</th>
+            <th>Conference Descreption</th>
+            <th>Conference Status</th>
+            <th>Submitting papers Start in</th>
+            <th>Submitting papers End in</th>
+            <th>ACTION</th>
+        </tr>
+        <tr th:each="conference: ${conferences}">
+            <td th:text="${conference.id}"></td>
+            <td th:text="${conference.titre}"></td>
+            <td th:text="${conference.topic}"></td>
+            <td th:text="${conference.descreption}"></td>
+            <td th:text="${conference.opend ? 'Open':'Closed'}"></td>
+            <td th:text="${conference.start}"></td>
+            <td th:text="${conference.end}"></td>
+            <td> <a th:href=${'/admin/edit-conference/'+conference.id}>Edit</a>|<a th:href="${'/admin/delete-conference/'+conference.id}">Delete</a>|<a th:href="${'/admin/close-conference/'+conference.id}">Close</a>
+            </td>
+        </tr>
+    </table>
+
+</div>
+
+</body>
+</html>

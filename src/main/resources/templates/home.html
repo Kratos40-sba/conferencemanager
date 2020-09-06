@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <link th:href="@{/main.css}" type="text/css" rel="stylesheet" />
+    <title>Home</title>
+</head>
+<body>
+<div th:insert="menu"></div>
+<div class="main">
+    <div th:insert="header"></div>
+    <table border="1" width="90%" align="center" cellpadding="5">
+        <tr>
+            <td class="fheading"  colspan="6">Your Informations</td>
+        </tr>
+        <tr>
+            <th>ID</th>
+            <th>FIRST NAME</th>
+            <th>LAST NAME</th>
+            <th>EMAIL</th>
+            <th>ROLE</th>
+            <th>ACTION</th>
+        </tr>
+        <tr>
+            <td th:text="${user.id}"></td>
+            <td th:text="${user.fName}"></td>
+            <td th:text="${user.lName}"></td>
+            <td th:text="${user.email}"></td>
+            <td th:text="${user.role}">INSTITUTE</td>
+            <td> <a th:href="@{/logout}">Logout</a> |  <a th:href="@{/profile-edit}">Edit</a></td>
+        </tr>
+    </table>
+    <div sec:authorize="hasRole('REVIEWER')">
+
+        <br/>
+        <table border="1" width="90%" align="center" cellpadding="5">
+            <tr>
+                <td class="fheading"  colspan="6">Your Papers To Review</td>
+            </tr>
+            <tr>
+                <th>Paper Title</th>
+                <th>Paper Abstraction</th>
+                <th>Conference</th>
+                <th>ACTION</th>
+            </tr>
+            <tr th:each="paper: ${papers_rev}">
+                <td th:text="${paper.title}"></td>
+                <td th:text="${paper.abstraction}"></td>
+                <td th:text="${paper.conference}"></td>
+                <td> <a th:href="${'/reviewer/create-review/'+paper.paper_id}">Review This Paper</a>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div sec:authorize="hasRole('AUTHOR')">
+        <br/>
+        <table border="1" width="90%" align="center" cellpadding="5">
+            <tr>
+                <td class="fheading"  colspan="6">Your Submitted Papers</td>
+            </tr>
+            <tr>
+                <th>Paper Title</th>
+                <th>Paper Status</th>
+                <th>Paper Submission Date</th>
+                <th>ACTION</th>
+            </tr>
+            <tr th:each="paper: ${papers}">
+                <td th:text="${paper.titre}"></td>
+                <td th:text="${paper.status ? 'Accepted':'In-progress'}"></td>
+                <td th:text="${paper.subb_date}"></td>
+                <td> <a th:href="@{/}">Delete</a>|<a th:href="@{/}">Details</a>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div sec:authorize="hasRole('ADMIN')">Admin</div>
+</div>
+</body>
+</html>

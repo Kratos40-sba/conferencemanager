@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign-up</title>
+    <link th:href="@{/main.css}" type="text/css" rel="stylesheet" />
+</head>
+<body>
+<div class="main" align="center" >
+    <div th:insert="header" ></div>
+    <h3>Fill your Information</h3>
+    <form  role="form" th:action="@{/auth/registration}"  th:object="${user}" method="post">
+
+        <input placeholder="First Name" type="text" th:field="*{first_name}" required><br><br>
+
+        <input placeholder="Last Name " type="text" th:field="*{last_name}" required><br><br>
+
+        <input placeholder="Email" type="email" th:field="*{email}" required><br><br>
+
+        <input  placeholder="Password" type="password" th:field="*{password}" required><br><br>
+
+        <button type="submit">Sign-Up</button>
+    </form >
+</div>
+</body>
+</html>

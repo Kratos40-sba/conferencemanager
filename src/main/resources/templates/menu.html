@@ -1,0 +1,34 @@
+<div class="sidenav" xmlns:th="http://www.w3.org/1999/xhtml">
+    <div >
+        <a  th:href="@{/home}" style="padding-bottom: 0; padding-top:0 ; margin-left: 12px">
+            <img th:src="@{/logo.png}" />
+        </a>
+        <a style="font-size: 12px; margin-left: 0; padding-top: 0" th:href="@{/home}">www.esiconf.com</a>
+    </div>
+
+    <div class="mheader">
+        User Managment
+    </div>
+    <a th:href="@{/admin/users-list}">User List</a>
+
+    <div class="mheader">
+        Conference Managment
+    </div>
+
+    <a th:href="@{/admin/create-conference}">Add Conference</a>
+    <a th:href="@{/conference-list}">Conference List</a>
+
+    <div class="mheader">
+        Paper Submission
+    </div>
+
+    <a th:href="@{/conference-list}">Add Paper</a>
+    <a th:href="@{/admin/papers-submitted}">Paper List</a>
+    <div class="mheader">
+        Reviews
+    </div>
+
+    <a th:href="@{/sources}">Add Review</a>
+    <a th:href="@{/courses}">Review List</a>
+
+</div>
