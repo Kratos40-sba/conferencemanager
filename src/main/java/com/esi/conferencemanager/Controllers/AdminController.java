@@ -3,6 +3,7 @@ package com.esi.conferencemanager.Controllers;
 import com.esi.conferencemanager.Model.Conference;
 import com.esi.conferencemanager.Model.Paper;
 import com.esi.conferencemanager.Model.Review;
+import com.esi.conferencemanager.Model.User;
 import com.esi.conferencemanager.Services.ConferenceService;
 import com.esi.conferencemanager.Services.PaperService;
 import com.esi.conferencemanager.Services.UserService;
@@ -34,6 +35,16 @@ public class AdminController {
     public String deleteUser(@PathVariable("user_id") Long user_id){
         userService.deleteUser(user_id);
         return "redirect:/admin/users-list";
+    }
+    @GetMapping("/user-details/{user_id}")
+    public String getUser(@PathVariable("user_id") Long user_id ,Model model){
+        User user = userService.getOne(user_id);
+        List<Paper> papers = user.getUserPapers();
+        List<Review> reviews = user.getUser_reviews();
+        model.addAttribute("user",user);
+        model.addAttribute("papers",papers);
+        model.addAttribute("reviews",reviews);
+        return "user_detail";
     }
     @GetMapping("/make-user-admin/{user_id}")
     public String makeUserAdmin(@PathVariable("user_id") Long user_id){

@@ -104,6 +104,9 @@ public class UserService implements UserDetailsService {
         user.setLName(user.getLName());
         userRepo.save(user);
     }
+    public User getOne(Long id){
+        return userRepo.getOne(id);
+    }
 
 
 }

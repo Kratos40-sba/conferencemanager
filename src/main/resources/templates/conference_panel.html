@@ -43,13 +43,13 @@
                 </td>
             </tr>
             <tr>
-                <td>Conference Start_Day</td>
+                <td>Paper Submitting Start in</td>
                 <td>
                     <input type="datetime-local" th:field="*{start}" required/>
                 </td>
             </tr>
             <tr>
-                <td>Conference End_Day</td>
+                <td>Paper Submitting Deadline</td>
                 <td>
                     <input type="datetime-local" th:field="*{end}" required/>
                 </td>
@@ -69,8 +69,8 @@
             <th>Conference Category</th>
             <th>Conference Descreption</th>
             <th>Conference Status</th>
-            <th>Submitting papers Start in</th>
-            <th>Submitting papers End in</th>
+            <th>Paper Submitting Start in</th>
+            <th>Paper Submitting Deadline</th>
             <th>ACTION</th>
         </tr>
         <tr th:each="conference: ${conferences}">

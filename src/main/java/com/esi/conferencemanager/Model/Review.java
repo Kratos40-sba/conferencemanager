@@ -18,7 +18,9 @@ public class Review implements Serializable {
     @Id
     @GeneratedValue
     private Long id;
-    private int mark;
+    private double mark;
+    private int mark1 , mark2 , mark3 , mark4;
+
     private String comment;
     private LocalDateTime reviewDate;
     @ManyToOne

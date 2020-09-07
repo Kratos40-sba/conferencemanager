@@ -9,23 +9,59 @@
 <div th:insert="menu"></div>
 <div class="main">
     <div th:insert="header"></div>
-
+    <table border="1" width="90%" align="center" cellpadding="5">
+        <tr>
+            <td class="fheading"  colspan="4">Paper Informations</td>
+        </tr>
+        <tr>
+            <td>Paper ID</td>
+            <td th:text="${paper.id}">
+            </td>
+        </tr>
+        <tr>
+            <td>Paper Title</td>
+            <td th:text="${paper.titre}">
+            </td>
+        </tr>
+        <tr>
+            <td>Paper Abstraction</td>
+            <td th:text="${paper.abstraction}">
+            </td>
+        </tr>
+        <tr>
+            <td>Download Paper</td>
+            <td>
+                <a th:href="${'/download-file/'+paper.id}">Click Here</a>
+            </td>
+        </tr>
+    </table>
     <form action="#" th:action="@{'/reviewer/create-review/'+${paper.id}}" th:object="${review}" method="post" enctype="multipart/form-data">
         <table border="1" width="90%" align="center" cellpadding="5">
             <tr>
                 <td class="fheading"  colspan="4">Review Form</td>
             </tr>
             <tr>
-                <td>Download Paper</td>
+                <td>Review Mark 1</td>
                 <td>
-                    <a th:href="${'/download-file/'+paper.id}">Click Here</a>
+                    <input type="number" th:field="*{mark1}" required/>
                 </td>
             </tr>
-
             <tr>
-                <td>Review Mark</td>
+                <td>Review Mark 2</td>
                 <td>
-                    <input type="text" th:field="*{mark}" required/>
+                    <input type="number" th:field="*{mark2}" required/>
+                </td>
+            </tr>
+            <tr>
+                <td>Review Mark 3</td>
+                <td>
+                    <input type="number" th:field="*{mark3}" required/>
+                </td>
+            </tr>
+            <tr>
+                <td>Review Mark 3</td>
+                <td>
+                    <input type="number" th:field="*{mark4}" required/>
                 </td>
             </tr>
             <tr>

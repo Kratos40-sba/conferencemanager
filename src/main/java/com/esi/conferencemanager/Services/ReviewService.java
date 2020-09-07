@@ -33,7 +33,8 @@ public class ReviewService {
         review.setReviewer(reviewer);
         review.setReviewDate(LocalDateTime.now());
         review.setComment(review.getComment());
-        review.setMark(review.getMark());
+        double s = (review.getMark1()+review.getMark2()+review.getMark3()+ review.getMark4())/4;
+        review.setMark(s);
         return  reviewRepo.save(review);
     }
     public void deleteReview(Long review_Id){

@@ -53,6 +53,10 @@
             <td th:text="${conference}">
             </td>
         </tr>
+        <tr>
+            <td>Actions</td>
+            <td> <a th:href=@{/}>Accept paper</a>|<a th:href="@{/}">Delete Paper</a>
+        </tr>
     </table>
     <table border="1" width="90%" align="center" cellpadding="5">
         <tr>
@@ -64,7 +68,6 @@
             <th>Review Mark</th>
             <th>Review Coment</th>
             <th>Reviewer Email</th>
-            <th>ACTION</th>
         </tr>
         <tr th:each="review: ${reviews}">
             <td th:text="${review.id}"></td>
@@ -72,8 +75,6 @@
             <td th:text="${review.mark}"></td>
             <td th:text="${review.comment}"></td>
             <td th:text="${review.reviewer.email}"></td>
-            <td> <a th:href=@{/}>Accept paper</a>|<a th:href="@{/}">Delete Paper</a>
-            </td>
         </tr>
     </table>
 

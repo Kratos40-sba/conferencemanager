@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <link th:href="@{/main.css}" type="text/css" rel="stylesheet" />
+    <title>User Details</title>
+</head>
+<body>
+<div th:insert="menu"></div>
+<div class="main">
+    <div th:insert="header"></div>
+    <table border="1" width="90%" align="center" cellpadding="5">
+        <tr>
+            <td class="fheading"  colspan="4">User Informations</td>
+        </tr>
+        <tr>
+            <td>User ID</td>
+            <td th:text="${user.id}">
+            </td>
+        </tr>
+        <tr>
+            <td>User First Name</td>
+            <td th:text="${user.fName}">
+            </td>
+        </tr>
+        <tr>
+            <td>User Last Name</td>
+            <td th:text="${user.lName}">
+            </td>
+        </tr>
+        <tr>
+            <td>User Email</td>
+            <td th:text="${user.email}">
+            </td>
+        </tr>
+        <tr>
+            <td>User Role</td>
+            <td th:text="${user.role}">
+            </td>
+        </tr>
+    </table>
+    <!-- user papers -->
+    <table border="1" width="90%" align="center" cellpadding="5">
+        <tr>
+            <td class="fheading"  colspan="6">User-Papers</td>
+        </tr>
+        <tr>
+            <th>ID</th>
+            <th>Paper Title</th>
+            <th>Paper Submission Date</th>
+            <th>Paper Status</th>
+            <th>Paper Reviewing Status</th>
+            <th>Conference</th>
+        </tr>
+        <tr th:each="paper: ${papers}">
+            <td th:text="${paper.id}"></td>
+            <td th:text="${paper.titre}"></td>
+            <td th:text="${paper.subb_date}"></td>
+            <td th:text="${paper.status ? 'Accepted':'In-Progress'}"></td>
+            <td th:text="${paper.reviewed ? 'Reviewed':'Not reviewed yet'}"></td>
+            <td th:text="${paper.conference.titre}"></td>
+        </tr>
+    </table>
+    <!-- user Reviews -->
+    <table border="1" width="90%" align="center" cellpadding="5">
+        <tr>
+            <td class="fheading"  colspan="6">User-Reviews</td>
+        </tr>
+        <tr>
+            <th>ID</th>
+            <th>Review Date</th>
+            <th>Review Mark</th>
+            <th>Review Paper</th>
+            <th>Conference</th>
+        </tr>
+        <tr th:each="review: ${reviews}">
+            <td th:text="${review.id}"></td>
+            <td th:text="${review.reviewDate}"></td>
+            <td th:text="${review.mark}"></td>
+            <td th:text="${review.reviewed_paper.titre}"></td>
+            <td th:text="${review.reviewed_paper.conference.titre}"></td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>
