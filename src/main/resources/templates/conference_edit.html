@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <link th:href="@{/main.css}" type="text/css" rel="stylesheet" />
+    <title>Edit Profile</title>
+</head>
+<body>
+<div th:insert="menu"></div>
+<div class="main">
+    <div th:insert="header"></div>
+    <form th:action="${'/admin/update-conference/'+conference.id}" th:object="${conference}" method="post">
+        <table border="1" width="90%" align="center" cellpadding="5">
+            <tr>
+                <td class="fheading"  colspan="4">Edit Conference</td>
+            </tr>
+            <tr>
+                <td>Conference Title</td>
+                <td>
+                    <input type="text" th:field="*{titre}" required/>
+                </td>
+            </tr>
+            <tr>
+                <td>Conference Descreption</td>
+                <td>
+                    <input type="text" th:field="*{descreption}" required/>
+                </td>
+            </tr>
+            <tr>
+                <td>Paper Submitting Start in</td>
+                <td>
+                    <input type="datetime-local" th:field="*{start}" required/>
+                </td>
+            </tr>
+            <tr>
+                <td>Topic/Category</td>
+                <td>
+                    <select  th:field="*{topic}" required>
+                        <option value="">Choose...</option>
+                        <option value="Data_Science">Data Science</option>
+                        <option value="Networks">Networks</option>
+                        <option value="Big_Data">Big Data</option>
+                        <option value="Software_Engineering">Software Engineering</option>
+                    </select>
+                </td>
+
+            </tr>
+            <tr>
+                <td>Paper Submitting Deadline</td>
+                <td>
+                    <input type="datetime-local" th:field="*{end}" required/>
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="4" align="center">
+                    <button>Save</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+</body>
+</html>

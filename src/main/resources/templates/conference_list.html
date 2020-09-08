@@ -26,7 +26,7 @@
             <td th:text="${conference.opend ? 'Open':'Closed'}"></td>
             <td th:text="${conference.start}"></td>
             <td th:text="${conference.end}"></td>
-            <td><a th:href="${'/author/create-paper/'+conference.id}">Submit Paper</a>|<a th:href="@{/}">View Papers</a>|<a th:href="@{/}">View Schedule</a>
+            <td><a th:href="${'/author/create-paper/'+conference.id}">Submit Paper</a>|<a th:href="${'/admin/papers-conference/'+conference.id}">View Papers</a>|<a th:href="@{/}">View Schedule</a>
             </td>
         </tr>
     </table>

@@ -38,8 +38,8 @@ public class ConferenceService {
     public Conference getConference(Long id){
         return conferenceRepo.getOne(id);
     }
-    public Conference updateConference(Conference conference){
-        return conferenceRepo.save(conference);
+    public void updateConference(Conference conference){
+        conferenceRepo.save(conference);
     }
     public Conference closeConference(Long conference_Id){
         Conference conference = conferenceRepo.getOne(conference_Id);

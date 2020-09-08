@@ -43,13 +43,13 @@ public class PublicController {
         return "conference_list";
     }
     @GetMapping("/profile-edit")
-    public String editProfile(Model model , Principal principal){
-        User current_user = userService.getByEmail(principal.getName());
-        model.addAttribute("user",current_user);
+    public String editProfile(Model model , Principal principal,@ModelAttribute("user") User user){
+        user = userService.getByEmail(principal.getName());
+        model.addAttribute("user",user);
         return"edit_profile";
     }
     @PostMapping("/profile-edit")
-    public String editProfile(@ModelAttribute User user , Principal principal){
+    public String editProfile(@ModelAttribute("user") User user , Principal principal){
         user = userService.getByEmail(principal.getName());
         userService.updateProfile(user);
         return "redirect:/home";

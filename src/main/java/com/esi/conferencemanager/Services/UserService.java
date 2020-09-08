@@ -95,14 +95,8 @@ public class UserService implements UserDetailsService {
     public User getByEmail(String email){
         return userRepo.findByEmail(email);
     }
-    public void updateProfile (User user){
-        user.setId(user.getId());
-        user.setRole(user.getRole());
-        user.setPassword(user.getPassword());
-        user.setEmail(user.getEmail());
-        user.setFName(user.getFName());
-        user.setLName(user.getLName());
-        userRepo.save(user);
+    public User updateProfile (User user){
+        return userRepo.save(user);
     }
     public User getOne(Long id){
         return userRepo.getOne(id);

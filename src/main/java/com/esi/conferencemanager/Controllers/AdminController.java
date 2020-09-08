@@ -7,6 +7,7 @@ import com.esi.conferencemanager.Model.User;
 import com.esi.conferencemanager.Services.ConferenceService;
 import com.esi.conferencemanager.Services.PaperService;
 import com.esi.conferencemanager.Services.UserService;
+import org.dom4j.rule.Mode;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -73,6 +74,16 @@ public class AdminController {
         conferenceService.createConference(conference);
         return "redirect:/admin/create-conference";
     }
+    @GetMapping("/update-conference/{id}")
+    public String getConferenceUpdateForm(@PathVariable("id")Long id,Model model){
+        model.addAttribute("conference",conferenceService.getConference(id));
+        return "conference_edit";
+    }
+    @PostMapping("/update-conference/{id}")
+    public String updateConference(@PathVariable("id") Long id,@ModelAttribute("conference") Conference conference){
+        conferenceService.updateConference(conference);
+        return "redirect:/conference-list";
+    }
     @GetMapping("/delete-conference/{conference_id}")
     public String deleteConference(@PathVariable("conference_id") Long conference_id){
         conferenceService.deleteConference(conference_id);
@@ -99,6 +110,11 @@ public class AdminController {
         model.addAttribute("conference",conference);
         model.addAttribute("reviews",reviews);
         return "paper_detail";
+    }
+    @GetMapping("/papers-conference/{conf_id}")
+    public String GetPapers(@PathVariable("conf_id") Long conf_id , Model model){
+        model.addAttribute("papers",conferenceService.getConference(conf_id).getPapers());
+        return "papers_conference";
     }
 
 
