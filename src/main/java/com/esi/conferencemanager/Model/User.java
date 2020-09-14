@@ -28,7 +28,11 @@ public class User implements Serializable {
     private String email ;
     @OneToMany(mappedBy = "author")
     private List<Paper> userPapers ;
+    @OneToMany
+    private List<Paper> paper_for_reviewing ;
     @OneToMany(mappedBy = "reviewer")
     private List<Review> user_reviews ;
     private Roles role ;
+    @OneToMany(mappedBy = "user_message")
+    private List<Message> feedbacks ;
 }

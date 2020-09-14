@@ -26,8 +26,8 @@
             <td th:text="${user.fName}"></td>
             <td th:text="${user.lName}"></td>
             <td th:text="${user.email}"></td>
-            <td th:text="${user.role}">INSTITUTE</td>
-            <td> <a th:href="@{/logout}">Logout</a> |  <a th:href="@{/profile-edit}">Edit</a></td>
+            <td th:text="${user.role}">*</td>
+            <td> <a th:href="@{/logout}">Logout</a> |  <a th:href="${'/profile-edit/'+user.id}">Edit</a></td>
         </tr>
     </table>
     <div sec:authorize="hasRole('REVIEWER')">
@@ -51,6 +51,23 @@
                 </td>
             </tr>
         </table>
+        <table border="1" width="90%" align="center" cellpadding="5">
+            <tr>
+                <td class="fheading"  colspan="6">Feedback</td>
+            </tr>
+            <tr>
+                <th>From</th>
+                <th>Subject</th>
+                <th>Message</th>
+                <th>Date</th>
+            </tr>
+            <tr th:each="feedback: ${feedbacks}">
+                <td th:text="${feedback.sender}"></td>
+                <td th:text="${feedback.subject}"></td>
+                <td th:text="${feedback.body}"></td>
+                <td th:text="${feedback.date}"></td>
+            </tr>
+        </table>
     </div>
     <div sec:authorize="hasRole('AUTHOR')">
         <br/>
@@ -72,7 +89,28 @@
                 </td>
             </tr>
         </table>
+        <table border="1" width="90%" align="center" cellpadding="5">
+            <tr>
+                <td class="fheading"  colspan="6">Feedback</td>
+            </tr>
+            <tr>
+                <th>From</th>
+                <th>Subject</th>
+                <th>Message</th>
+                <th>Date</th>
+            </tr>
+            <tr th:each="feedback: ${feedbacks}">
+                <td th:text="${feedback.sender}"></td>
+                <td th:text="${feedback.subject}"></td>
+                <td th:text="${feedback.body}"></td>
+                <td th:text="${feedback.date}"></td>
+            </tr>
+        </table>
     </div>
+    <br/>
+
+
+
     <div sec:authorize="hasRole('ADMIN')"></div>
 </div>
 </body>

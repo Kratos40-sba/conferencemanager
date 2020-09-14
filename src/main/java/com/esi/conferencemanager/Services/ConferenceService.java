@@ -7,7 +7,7 @@ import com.esi.conferencemanager.Repositories.PaperRepo;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
+
 
 @Service
 public class ConferenceService {
@@ -31,9 +31,6 @@ public class ConferenceService {
         List<Paper> papers = conference.getPapers();
         paperRepo.deleteAll(papers);
         conferenceRepo.deleteById(id);
-    }
-    public Conference findConference(Optional <Long>  id){
-        return  conferenceRepo.getOne(id.get());
     }
     public Conference getConference(Long id){
         return conferenceRepo.getOne(id);

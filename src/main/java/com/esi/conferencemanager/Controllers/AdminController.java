@@ -1,17 +1,12 @@
 package com.esi.conferencemanager.Controllers;
 
-import com.esi.conferencemanager.Model.Conference;
-import com.esi.conferencemanager.Model.Paper;
-import com.esi.conferencemanager.Model.Review;
-import com.esi.conferencemanager.Model.User;
-import com.esi.conferencemanager.Services.ConferenceService;
-import com.esi.conferencemanager.Services.PaperService;
-import com.esi.conferencemanager.Services.UserService;
-import org.dom4j.rule.Mode;
+import com.esi.conferencemanager.Model.*;
+import com.esi.conferencemanager.Services.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,10 +17,14 @@ public class AdminController {
     private final UserService userService ;
     private final ConferenceService conferenceService ;
     private final PaperService paperService;
-    public AdminController(UserService userService, ConferenceService conferenceService, PaperService paperService) {
+    private final FeedbackService feedbackService ;
+    private final AssignmentService assignmentService ;
+    public AdminController(UserService userService, ConferenceService conferenceService, PaperService paperService, FeedbackService feedbackService, AssignmentService assignmentService) {
         this.userService = userService;
         this.conferenceService = conferenceService;
         this.paperService = paperService;
+        this.feedbackService = feedbackService;
+        this.assignmentService = assignmentService;
     }
     @GetMapping("/users-list")
     public String getUsers(Model model){
@@ -68,6 +67,20 @@ public class AdminController {
         model.addAttribute("conference",conference);
         model.addAttribute("conferences",conferenceService.getAllConferences());
         return "conference_panel";
+    }
+    @GetMapping("/send-feedback/{user_id}")
+    public String getFeedbackForm(@PathVariable("user_id")  Long user_id ,Model model){
+        model.addAttribute("feedback", new Message());
+        User user = userService.getOne(user_id);
+        model.addAttribute("user",user);
+        model.addAttribute("feedbacks",user.getFeedbacks());
+        return "feedback_form";
+    }
+    @PostMapping("/send-feedback/{user_id}")
+    public String createFeedback(@PathVariable("user_id") Long user_id , @ModelAttribute Message feedback , Principal principal){
+        feedbackService.createFeedback(user_id,feedback,principal);
+
+        return "redirect:/admin/users-list";
     }
     @PostMapping("/create-conference")
     public String createConference(@ModelAttribute Conference conference){
@@ -115,6 +128,11 @@ public class AdminController {
     public String GetPapers(@PathVariable("conf_id") Long conf_id , Model model){
         model.addAttribute("papers",conferenceService.getConference(conf_id).getPapers());
         return "papers_conference";
+    }
+    @GetMapping("/show-papers-accepted/{conf_id}")
+    public String GetAcceptedPapers(@PathVariable("conf_id") Long conf_id , Model model){
+
+        return "";
     }
 
 

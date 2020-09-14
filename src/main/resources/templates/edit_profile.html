@@ -9,7 +9,7 @@
 <div th:insert="menu"></div>
 <div class="main">
     <div th:insert="header"></div>
-    <form th:action="@{/profile-edit}" th:object="${user}" method="post">
+    <form th:action="${'/profile-edit/'+user.id}" th:object="${user}" method="post">
     <table border="1" width="90%" align="center" cellpadding="5">
         <tr>
             <td class="fheading"  colspan="4">Informations Form</td>

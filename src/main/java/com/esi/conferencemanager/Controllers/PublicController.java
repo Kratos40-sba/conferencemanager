@@ -35,6 +35,7 @@ public class PublicController {
         model.addAttribute("user",user);
         model.addAttribute("papers",paperService.myPapers(current_user));
         model.addAttribute("papers_rev",paperService.getReviewerPapers());
+        model.addAttribute("feedbacks",user.getFeedbacks());
         return "home";
     }
     @GetMapping("/conference-list")
@@ -42,15 +43,13 @@ public class PublicController {
         model.addAttribute("conferences",conferenceService.getAllConferences());
         return "conference_list";
     }
-    @GetMapping("/profile-edit")
-    public String editProfile(Model model , Principal principal,@ModelAttribute("user") User user){
-        user = userService.getByEmail(principal.getName());
-        model.addAttribute("user",user);
+    @GetMapping("/profile-edit/{user_id}")
+    public String editProfile(@PathVariable("user_id") Long id , Model model){
+       model.addAttribute("user",userService.getOne(id));
         return"edit_profile";
     }
-    @PostMapping("/profile-edit")
-    public String editProfile(@ModelAttribute("user") User user , Principal principal){
-        user = userService.getByEmail(principal.getName());
+    @PostMapping("/profile-edit/{user_id}")
+    public String editProfile(@ModelAttribute("user") User user){
         userService.updateProfile(user);
         return "redirect:/home";
     }

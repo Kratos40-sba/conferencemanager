@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <link th:href="@{/main.css}" type="text/css" rel="stylesheet" />
+    <title>Send Feedback</title>
+</head>
+<body>
+<div th:insert="menu"></div>
+<div class="main">
+    <div th:insert="header"></div>
+
+    <form th:action="${'/admin/send-feedback/'+user.id}" th:object="${feedback}" method="post">
+        <table border="1" width="90%" align="center" cellpadding="5">
+            <tr>
+                <td class="fheading"  colspan="4">Feedback Form</td>
+            </tr>
+            <tr>
+                <td>Subject</td>
+                <td>
+                    <input type="text" th:field="*{subject}" required/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>Feedback-Body / Message</td>
+                <td colspan="4">
+                    <textarea type="text" th:field="*{body}"   title="description" cols="80" rows="10" required></textarea>
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="4" align="center">
+                    <button>Send</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+    <br/>
+    <table border="1" width="90%" align="center" cellpadding="5">
+        <tr>
+            <th>Feedback ID</th>
+            <th>From</th>
+            <th>To</th>
+            <th>Feedback Subject</th>
+            <th>Feedback Message</th>
+            <th>Date</th>
+        </tr>
+        <tr th:each="f: ${feedbacks}">
+            <td th:text="${f.id}"></td>
+            <td th:text="${f.sender}"></td>
+            <td th:text="${f.reciver}"></td>
+            <td th:text="${f.subject}"></td>
+            <td th:text="${f.body}"></td>
+            <td th:text="${f.date}"></td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

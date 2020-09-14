@@ -64,6 +64,8 @@ public class UserService implements UserDetailsService {
         user.setRole(Roles.ROLE_AUTHOR);
         user.setUserPapers(null);
         user.setUser_reviews(null);
+        user.setPaper_for_reviewing(null);
+        user.setFeedbacks(null);
         return userRepo.save(user) ;
     }
     public void makeUserAdmin(Long user_Id){
@@ -95,8 +97,8 @@ public class UserService implements UserDetailsService {
     public User getByEmail(String email){
         return userRepo.findByEmail(email);
     }
-    public User updateProfile (User user){
-        return userRepo.save(user);
+    public void updateProfile (User user){
+         userRepo.save(user);
     }
     public User getOne(Long id){
         return userRepo.getOne(id);
