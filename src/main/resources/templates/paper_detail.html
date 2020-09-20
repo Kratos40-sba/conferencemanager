@@ -55,7 +55,7 @@
         </tr>
         <tr>
             <td>Actions</td>
-            <td> <a th:href=@{/}>Accept paper</a>|<a th:href="@{/}">Delete Paper</a>
+            <td> <a th:href="${'/admin/accept-paper/'+paper.id}">Accept paper</a>|<a th:href="${'/admin/refuse-paper/'+paper.id}">Refuse Paper</a>
         </tr>
     </table>
     <table border="1" width="90%" align="center" cellpadding="5">

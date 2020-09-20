@@ -74,5 +74,16 @@ public class PaperService {
         return rsponse;
 
     }
+    public void acceptPaper (Long id){
+        Paper paper = paperRepo.getOne(id);
+        paper.setStatus(true );
+        paperRepo.save(paper);
+    }
+    public void refusePaper (Long id){
+        Paper paper = paperRepo.getOne(id);
+        paper.setStatus(false );
+        paperRepo.save(paper);
+    }
+
 
 }

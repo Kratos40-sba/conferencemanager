@@ -129,6 +129,18 @@ public class AdminController {
         model.addAttribute("papers",conferenceService.getConference(conf_id).getPapers());
         return "papers_conference";
     }
+    @GetMapping("/accept-paper/{paper_id}")
+    public String acceptPaper(@PathVariable("paper_id") Long id , Principal principal , Message feedback ){
+        paperService.acceptPaper(id);
+        feedbackService.acceptedPaperFeedback(feedback,id,principal);
+        return "redirect:/admin/papers-submitted";
+    }
+    @GetMapping("/refuse-paper/{paper_id}")
+    public String refusePaper(@PathVariable("paper_id") Long id , Principal principal , Message feedback ){
+        paperService.refusePaper(id);
+        feedbackService.refusedPaperFeedback(feedback,id,principal);
+        return "redirect:/admin/papers-submitted";
+    }
     @GetMapping("/show-papers-accepted/{conf_id}")
     public String GetAcceptedPapers(@PathVariable("conf_id") Long conf_id , Model model){
 
