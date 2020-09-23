@@ -17,6 +17,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -72,6 +73,16 @@ public class UserService implements UserDetailsService {
         User user = userRepo.getOne(user_Id);
         user.setRole(Roles.ROLE_ADMIN);
         userRepo.save(user);
+    }
+    public List<User> getReviewers(){
+        List<User> users = userRepo.findAll();
+        List<User> revewers = new ArrayList<>();
+        for(User u : users){
+            if (u.getRole().equals(Roles.ROLE_REVIEWER)){
+                revewers.add(u);
+            }
+        }
+        return revewers;
     }
     public void makeUserReviewer(Long user_Id){
         User user = userRepo.getOne(user_Id);

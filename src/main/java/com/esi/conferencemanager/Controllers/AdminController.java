@@ -129,6 +129,7 @@ public class AdminController {
         model.addAttribute("papers",conferenceService.getConference(conf_id).getPapers());
         return "papers_conference";
     }
+
     @GetMapping("/accept-paper/{paper_id}")
     public String acceptPaper(@PathVariable("paper_id") Long id , Principal principal , Message feedback ){
         paperService.acceptPaper(id);
@@ -141,6 +142,22 @@ public class AdminController {
         feedbackService.refusedPaperFeedback(feedback,id,principal);
         return "redirect:/admin/papers-submitted";
     }
+    @GetMapping("/papers-reviewers/{paper_id}")
+    public String paperReviewerAssignment(@PathVariable("paper_id") Long id , Model model){
+        Paper paper = paperService.getOnePaper(id);
+        List<User> revewers = userService.getReviewers();
+        model.addAttribute("paper",paper);
+        model.addAttribute("reviewers",revewers);
+        return "paper_revewers";
+    }
+    @PostMapping("/papers-reviewers/{paper_id}")
+    public String createAssignment (@PathVariable("paper_id") Long id ,@RequestParam(value = "revs" , required = true) List<Long> reviewers_id){
+        assignmentService.createAssigment(id,reviewers_id,new Assignment());
+        return "redirect:/admin/papers-submitted";
+
+
+    }
+
     @GetMapping("/show-papers-accepted/{conf_id}")
     public String GetAcceptedPapers(@PathVariable("conf_id") Long conf_id , Model model){
 

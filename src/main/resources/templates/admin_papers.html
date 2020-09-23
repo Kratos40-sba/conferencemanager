@@ -9,7 +9,7 @@
 <div th:insert="menu"></div>
 <div class="main">
     <div th:insert="header"></div>
-    <table border="1" width="90%" align="center" cellpadding="5">
+    <table border="1" width="90%" align="center" cellpadding="3">
         <tr>
             <th>ID</th>
             <th>Paper Title</th>
@@ -24,7 +24,8 @@
             <td th:text="${paper.conference_title}"></td>
             <td th:text="${paper.submitter_email}"></td>
             <td th:text="${paper.date_submit}"></td>
-            <td> <a th:href="${'/admin/paper-detail/'+paper.id}">Details</a>
+            <td> <a th:href="${'/admin/paper-detail/'+paper.id}">Details</a> |
+                <a th:href="${'/admin/papers-reviewers/'+paper.id}">Assigne Paper To reviewers</a>
             </td>
         </tr>
     </table>

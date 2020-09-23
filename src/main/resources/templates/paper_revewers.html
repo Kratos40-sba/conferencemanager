@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <link th:href="@{/main.css}" type="text/css" rel="stylesheet" />
+    <title>Assigne Paper to Reviewers</title>
+</head>
+<body>
+<div th:insert="menu"></div>
+<div class="main">
+<div th:insert="header"></div>
+    <form th:action="${'/admin/papers-reviewers/'+paper.id}" th:object="${paper}" method="post">
+    <table border="1" width="90%" align="center" cellpadding="5">
+        <tr>
+            <td class="fheading"  colspan="4">Assignment Form</td>
+        </tr>
+        <tr>
+            <td>Reviewer Email</td>
+            <td>
+                <th:block th:each="r : ${reviewers}">
+                    <input type="checkbox" name="revs" th:value="${r.id}"/>
+                    <label th:text="${r.email}">Reviewer Email</label>
+                </th:block>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4" align="center">
+                <button>Save</button>
+            </td>
+        </tr>
+    </table>
+    </form>
+</div>
+</body>
+</html>
