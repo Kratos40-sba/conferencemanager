@@ -25,11 +25,14 @@ public class AssignmentService {
     }
     public void createAssigment(Long paper_id , List<Long> reviewers_id , Assignment assignment) {
         List<User> reviewers = new ArrayList<User>();
+        List<Paper> papers = new ArrayList<>();
         Paper paper = paperRepo.getOne(paper_id);
+        papers.add(paper);
         assignment.setPaper_assigned(paper);
         for (Long id : reviewers_id){
-         reviewers.add(userRepo.getOne(id));
-
+            User reviewer = userRepo.getOne(id);
+            reviewer.setPaper_for_reviewing(papers);
+            reviewers.add(userRepo.getOne(id));
         }
         assignment.setReviewer_assigned(reviewers);
         assignment.setAssignement_date(LocalDateTime.now());

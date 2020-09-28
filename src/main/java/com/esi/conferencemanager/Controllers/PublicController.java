@@ -34,7 +34,7 @@ public class PublicController {
         User user = userService.getByEmail(current_user.getName());
         model.addAttribute("user",user);
         model.addAttribute("papers",paperService.myPapers(current_user));
-        model.addAttribute("papers_rev",paperService.getReviewerPapers());
+        model.addAttribute("papers_rev",paperService.getReviewerPapers(current_user));
         model.addAttribute("feedbacks",user.getFeedbacks());
         return "home";
     }

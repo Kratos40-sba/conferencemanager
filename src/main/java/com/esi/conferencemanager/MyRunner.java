@@ -44,6 +44,15 @@ public class MyRunner implements CommandLineRunner {
         reviewer.setUserPapers(null);
         reviewer.setPassword(passwordEncoder.encode("1234"));
         userService.save(reviewer);
+        User reviewer1 = new User();
+        reviewer1.setFName("Reviewer1");
+        reviewer1.setLName("Reviewer1");
+        reviewer1.setEmail("reviewer1@gmail.com");
+        reviewer1.setRole(Roles.ROLE_REVIEWER);
+        reviewer1.setUser_reviews(null);
+        reviewer1.setUserPapers(null);
+        reviewer1.setPassword(passwordEncoder.encode("1234"));
+        userService.save(reviewer1);
         userService.registration(new UserRegistration("author", "author", "author@gmail.com", "12345"));
 
 

@@ -1,8 +1,10 @@
 package com.esi.conferencemanager.Controllers;
 
 import com.esi.conferencemanager.Model.Review;
+import com.esi.conferencemanager.Model.User;
 import com.esi.conferencemanager.Services.PaperService;
 import com.esi.conferencemanager.Services.ReviewService;
+import com.esi.conferencemanager.Services.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -14,10 +16,12 @@ import java.security.Principal;
 public class ReviewerController {
     private final PaperService paperService ;
     private final ReviewService reviewService ;
+    private final UserService userService ;
 
-    public ReviewerController(PaperService paperService, ReviewService reviewService) {
+    public ReviewerController(PaperService paperService, ReviewService reviewService, UserService userService) {
         this.paperService = paperService;
         this.reviewService = reviewService;
+        this.userService = userService;
     }
 
     // create/update/delete a review
@@ -31,6 +35,8 @@ public class ReviewerController {
     }
     @PostMapping("create-review/{paper_id}")
     public String createReview(@PathVariable("paper_id") Long paper_id , @ModelAttribute("review")Review review, Principal principal){
+       /* User reviewer = userService.getByEmail(principal.getName());
+        if(reviewer.getUser_reviews())*/
         reviewService.createReview(paper_id,review,principal);
         return "redirect:/home";
     }

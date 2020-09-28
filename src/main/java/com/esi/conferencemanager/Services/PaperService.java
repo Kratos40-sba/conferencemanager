@@ -66,9 +66,11 @@ public class PaperService {
         List<Paper> papers = author.getUserPapers();
         return papers ;
     }
-    public List<Papers_Reviewer> getReviewerPapers(){
+    public List<Papers_Reviewer> getReviewerPapers(Principal principal){
+        User reviewer = userRepo.findByEmail(principal.getName());
         // this should be grabbing papers from assigned papers
-        List<Paper> papers = paperRepo.findAll();
+
+        List<Paper> papers = reviewer.getPaper_for_reviewing();
         List<Papers_Reviewer> rsponse = new ArrayList<>();
         papers.forEach(paper -> rsponse.add(new Papers_Reviewer(paper.getId(),paper.getTitre(),paper.getAbstraction(),paper.getConference().getTitre())));
         return rsponse;
@@ -81,7 +83,7 @@ public class PaperService {
     }
     public void refusePaper (Long id){
         Paper paper = paperRepo.getOne(id);
-        paper.setStatus(false );
+        paper.setStatus(false);
         paperRepo.save(paper);
     }
 
