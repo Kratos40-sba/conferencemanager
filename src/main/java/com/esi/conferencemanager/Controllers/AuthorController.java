@@ -40,6 +40,15 @@ public class AuthorController {
         paperService.createPaper(file,conference_id,author,paper);
         return "redirect:/author/create-paper/{conference_id}";
     }
+    @GetMapping("/delete-paper/{paper_id}")
+    public String deletePaper(@PathVariable("paper_id") Long id){
+        Paper paper = paperService.getOnePaper(id);
+        paper.setAuthor(null);
+        paper.setConference(null);
+        paper.setReviews(null);
+        paperService.deletePaper(id);
+        return "redirect:/home";
+    }
     // add a paper to a specefic conference
     // update / delete a paper
     // check your paper status

@@ -111,7 +111,27 @@
 
 
 
-    <div sec:authorize="hasRole('ADMIN')"></div>
+    <div sec:authorize="hasRole('ADMIN')">
+        <table border="1" width="90%" align="center" cellpadding="5">
+            <tr>
+                <td class="fheading"  colspan="6">Feedback</td>
+            </tr>
+            <tr>
+                <th>From</th>
+                <th>Subject</th>
+                <th>Message</th>
+                <th>Date</th>
+            </tr>
+            <tr th:each="feedback: ${feedbacks}">
+                <td th:text="${feedback.sender}"></td>
+                <td th:text="${feedback.subject}"></td>
+                <td th:text="${feedback.body}"></td>
+                <td th:text="${feedback.date}"></td>
+            </tr>
+        </table>
+    </div>
+
+    </div>
 </div>
 </body>
 </html>

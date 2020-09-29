@@ -30,13 +30,21 @@
         </div>
 
         <a th:href="@{/conference-list}">Add Paper</a>
-        <a th:href="@{/admin/papers-submitted}">Paper List</a>
+        <div class="mheader">
+            Send feedback to Admin
+        </div>
+        <a th:href="@{/p/send-feedback-to-admin}">Admins List</a>
+
     </div>
     <div sec:authorize="hasRole('REVIEWER')">
         <div class="mheader">
             Reviews
         </div>
         <a th:href="@{/courses}">Review List</a>
+        <div class="mheader">
+            Send feedback to Admin
+        </div>
+        <a th:href="@{/p/send-feedback-to-admin}">Admins List</a>
 
     </div>
 

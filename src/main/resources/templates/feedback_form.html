@@ -10,7 +10,7 @@
 <div class="main">
     <div th:insert="header"></div>
 
-    <form th:action="${'/admin/send-feedback/'+user.id}" th:object="${feedback}" method="post">
+    <form th:action="${'/p/send-feedback/'+user.id}" th:object="${feedback}" method="post">
         <table border="1" width="90%" align="center" cellpadding="5">
             <tr>
                 <td class="fheading"  colspan="4">Feedback Form</td>

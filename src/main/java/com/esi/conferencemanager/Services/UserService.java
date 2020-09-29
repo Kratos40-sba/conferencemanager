@@ -84,6 +84,16 @@ public class UserService implements UserDetailsService {
         }
         return revewers;
     }
+    public List<User> getAdmins(){
+        List<User> users = userRepo.findAll();
+        List<User> admins = new ArrayList<>();
+        for(User u : users){
+            if (u.getRole().equals(Roles.ROLE_ADMIN)){
+                admins.add(u);
+            }
+        }
+        return admins;
+    }
     public void makeUserReviewer(Long user_Id){
         User user = userRepo.getOne(user_Id);
         user.setRole(Roles.ROLE_REVIEWER);

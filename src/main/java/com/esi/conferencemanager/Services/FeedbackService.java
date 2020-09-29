@@ -49,5 +49,18 @@ public class FeedbackService {
         feedbackRepo.save(feedback);
 
     }
+    public void deletedPaperFeedback(Message feedback , Long paper_id , Principal principal){
+        Paper paper = paperRepo.getOne(paper_id);
+        feedback.setReciver(paper.getAuthor().getEmail());
+        feedback.setUser_message(paper.getAuthor());
+        feedback.setSender(userRepo.findByEmail(principal.getName()).getEmail());
+        feedback.setDate(LocalDateTime.now());
+        feedback.setSubject("Paper-Status");
+        feedback.setBody("Your paper have been deleted");
+        feedbackRepo.save(feedback);
+
+    }
+
+
 
 }

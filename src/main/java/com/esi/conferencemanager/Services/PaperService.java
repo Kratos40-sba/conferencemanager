@@ -33,6 +33,7 @@ public class PaperService {
         return paperRepo.getOne(paper_Id);
     }
     public void  deletePaper(Long paper_Id){
+
         paperRepo.deleteById(paper_Id);
     }
     public Paper createPaper(MultipartFile file , Long conference_Id , User author,Paper paper){

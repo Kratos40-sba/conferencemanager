@@ -68,20 +68,7 @@ public class AdminController {
         model.addAttribute("conferences",conferenceService.getAllConferences());
         return "conference_panel";
     }
-    @GetMapping("/send-feedback/{user_id}")
-    public String getFeedbackForm(@PathVariable("user_id")  Long user_id ,Model model){
-        model.addAttribute("feedback", new Message());
-        User user = userService.getOne(user_id);
-        model.addAttribute("user",user);
-        model.addAttribute("feedbacks",user.getFeedbacks());
-        return "feedback_form";
-    }
-    @PostMapping("/send-feedback/{user_id}")
-    public String createFeedback(@PathVariable("user_id") Long user_id , @ModelAttribute Message feedback , Principal principal){
-        feedbackService.createFeedback(user_id,feedback,principal);
 
-        return "redirect:/admin/users-list";
-    }
     @PostMapping("/create-conference")
     public String createConference(@ModelAttribute Conference conference){
         conferenceService.createConference(conference);
