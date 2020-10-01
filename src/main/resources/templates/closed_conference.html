@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <link th:href="@{/main.css}" type="text/css" rel="stylesheet" />
+    <title>Closed Conference</title>
+</head>
+<body>
+<div class="main" align="center">
+    <div th:insert="header"></div>
+    <div class="txt_red">This Conference Has been Closed</div>
+
+    <a th:href="@{/home}">
+        <div class="txt_small">back to home page</div>
+    </a>
+</div>
+</body>
+</html>

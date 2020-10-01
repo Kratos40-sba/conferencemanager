@@ -27,7 +27,7 @@
             <td th:text="${user.lName}"></td>
             <td th:text="${user.email}"></td>
             <td th:text="${user.role}">*</td>
-            <td> <a th:href="@{/logout}">Logout</a> |  <a th:href="${'/profile-edit/'+user.id}">Edit</a></td>
+            <td> <a th:href="@{/logout}">Logout</a></td>
         </tr>
     </table>
     <div sec:authorize="hasRole('REVIEWER')">
@@ -85,7 +85,7 @@
                 <td th:text="${paper.titre}"></td>
                 <td th:text="${paper.status ? 'Accepted':'In-progress'}"></td>
                 <td th:text="${paper.subb_date}"></td>
-                <td> <a th:href="@{/}">Delete</a>|<a th:href="@{/}">Details</a>
+                <td> <a th:href="${'/author/delete-paper/'+paper.id}">Delete</a>|<a th:href="@{/}">Edit</a>
                 </td>
             </tr>
         </table>

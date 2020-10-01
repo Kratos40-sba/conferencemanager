@@ -56,6 +56,9 @@ public class PaperService {
         }
         return null;
     }
+    public void updatePaper(Paper paper){
+        paperRepo.save(paper);
+    }
     public List<Paper_admin_response> getPapers(){
         List<Paper> papers = paperRepo.findAll();
         List<Paper_admin_response> rsponse = new ArrayList<>();

@@ -29,10 +29,16 @@ public class AuthorController {
     @GetMapping("/create-paper/{conference_id}")
     public String getPaperForm(@PathVariable("conference_id") Long conference_id , Model model){
         Conference conference = conferenceService.getConference(conference_id);
-        model.addAttribute("paper",new Paper());
-        model.addAttribute("conference",conference);
-        model.addAttribute("papers",conference.getPapers());
-        return "paper_panel";
+        if (conference.isOpend()){
+            model.addAttribute("paper",new Paper());
+            model.addAttribute("conference",conference);
+            model.addAttribute("papers",conference.getPapers());
+            return "paper_panel";
+
+        }else {
+            return "closed_conference";
+        }
+
     }
     @PostMapping("/create-paper/{conference_id}")
     public String createPaper(@ModelAttribute Paper paper,@PathVariable("conference_id") Long conference_id , @RequestParam("file") MultipartFile file , Principal principal) {

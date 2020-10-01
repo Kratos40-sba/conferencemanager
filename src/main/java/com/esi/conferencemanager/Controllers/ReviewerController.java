@@ -1,5 +1,6 @@
 package com.esi.conferencemanager.Controllers;
 
+import com.esi.conferencemanager.Model.Paper;
 import com.esi.conferencemanager.Model.Review;
 import com.esi.conferencemanager.Model.User;
 import com.esi.conferencemanager.Services.PaperService;
@@ -28,15 +29,21 @@ public class ReviewerController {
     // consulte your reviews pages
     // download paper
     @GetMapping("create-review/{paper_id}")
-    public String getReviewForm(@PathVariable("paper_id") Long paper_id , Model model){
-        model.addAttribute("review",new Review());
-        model.addAttribute("paper",paperService.getOnePaper(paper_id));
-        return "review_form";
+    public String getReviewForm(@PathVariable("paper_id") Long paper_id , Model model , Principal principal){
+        User reviewer = userService.getByEmail(principal.getName());
+        Paper paper = paperService.getOnePaper(paper_id);
+        if(reviewService.reviewExiste(paper,reviewer)){
+            return "review_exist";
+        }else {
+
+            model.addAttribute("review",new Review());
+            model.addAttribute("paper",paperService.getOnePaper(paper_id));
+            return "review_form";
+        }
+
     }
     @PostMapping("create-review/{paper_id}")
     public String createReview(@PathVariable("paper_id") Long paper_id , @ModelAttribute("review")Review review, Principal principal){
-       /* User reviewer = userService.getByEmail(principal.getName());
-        if(reviewer.getUser_reviews())*/
         reviewService.createReview(paper_id,review,principal);
         return "redirect:/home";
     }

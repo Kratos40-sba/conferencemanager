@@ -22,6 +22,9 @@ public class ReviewService {
         this.paperRepo = paperRepo;
         this.userRepo = userRepo;
     }
+    public Boolean reviewExiste(Paper paper , User reviewer){
+        return reviewRepo.existsByReviewed_paperAndAndReviewer(paper,reviewer);
+    }
     public List<Review> getAllReviews(){
         return reviewRepo.findAll();
     }

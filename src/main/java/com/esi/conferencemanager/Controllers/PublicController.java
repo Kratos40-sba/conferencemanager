@@ -48,16 +48,6 @@ public class PublicController {
         model.addAttribute("conferences",conferenceService.getAllConferences());
         return "conference_list";
     }
-    @GetMapping("/profile-edit/{user_id}")
-    public String editProfile(@PathVariable("user_id") Long id , Model model){
-       model.addAttribute("user",userService.getOne(id));
-        return"edit_profile";
-    }
-    @PostMapping("/profile-edit/{user_id}")
-    public String editProfile(@ModelAttribute("user") User user){
-        userService.updateProfile(user);
-        return "redirect:/home";
-    }
     @GetMapping("/download-file/{paper_id}")
     public ResponseEntity<ByteArrayResource> downloadFile(@PathVariable("paper_id") Long id){
         Paper file = paperService.getOnePaper(id);
