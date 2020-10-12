@@ -85,8 +85,13 @@
                 <td th:text="${paper.titre}"></td>
                 <td th:text="${paper.status ? 'Accepted':'In-progress'}"></td>
                 <td th:text="${paper.subb_date}"></td>
-                <td> <a th:href="${'/author/delete-paper/'+paper.id}">Delete</a>|<a th:href="@{/}">Edit</a>
+
+                <td>
+                    <span th:if="${!paper.reviewed}">
+                    <a th:href="${'/author/delete-paper/'+paper.id}">Delete</a>
+                           </span>
                 </td>
+
             </tr>
         </table>
         <table border="1" width="90%" align="center" cellpadding="5">

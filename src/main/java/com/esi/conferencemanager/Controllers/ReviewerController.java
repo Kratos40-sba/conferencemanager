@@ -32,14 +32,10 @@ public class ReviewerController {
     public String getReviewForm(@PathVariable("paper_id") Long paper_id , Model model , Principal principal){
         User reviewer = userService.getByEmail(principal.getName());
         Paper paper = paperService.getOnePaper(paper_id);
-        if(reviewService.reviewExiste(paper,reviewer)){
-            return "review_exist";
-        }else {
-
             model.addAttribute("review",new Review());
             model.addAttribute("paper",paperService.getOnePaper(paper_id));
             return "review_form";
-        }
+
 
     }
     @PostMapping("create-review/{paper_id}")

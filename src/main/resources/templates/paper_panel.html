@@ -53,13 +53,18 @@
             <th>ACTION</th>
         </tr>
         <tr th:each="paper: ${papers}">
+
             <td th:text="${paper.id}"></td>
             <td th:text="${paper.titre}"></td>
             <td th:text="${paper.abstraction}"></td>
             <td th:text="${paper.status ? 'Accepted':'In-progress'}"></td>
             <td th:text="${paper.reviewed ? 'Reviewed':'Not reviewed yet'}"></td>
             <td th:text="${paper.subb_date}"></td>
-            <td> <a th:href="${'/author/delete-paper/'+paper.id}">Delete</a>|<a th:href="${'/download-file/'+paper.id}">Download File</a>
+
+                <td>
+                    <span th:if="${!paper.reviewed}">
+                    <a th:href="${'/author/delete-paper/'+paper.id}">Delete</a>|<a th:href="${'/download-file/'+paper.id}">Download File</a>
+                    </span>
             </td>
         </tr>
     </table>

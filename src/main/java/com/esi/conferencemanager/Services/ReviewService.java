@@ -22,9 +22,8 @@ public class ReviewService {
         this.paperRepo = paperRepo;
         this.userRepo = userRepo;
     }
-    public Boolean reviewExiste(Paper paper , User reviewer){
-        return reviewRepo.existsByReviewed_paperAndAndReviewer(paper,reviewer);
-    }
+
+
     public List<Review> getAllReviews(){
         return reviewRepo.findAll();
     }
@@ -49,4 +48,5 @@ public class ReviewService {
     public Review updateReview(Long review_Id){
         return reviewRepo.save(reviewRepo.getOne(review_Id));
     }
+
 }

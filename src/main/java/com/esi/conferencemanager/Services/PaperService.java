@@ -4,14 +4,11 @@ import com.esi.conferencemanager.Dto.Paper_admin_response;
 import com.esi.conferencemanager.Dto.Papers_Reviewer;
 import com.esi.conferencemanager.Model.Paper;
 import com.esi.conferencemanager.Model.User;
-import com.esi.conferencemanager.Repositories.ConferenceRepo;
-import com.esi.conferencemanager.Repositories.PaperRepo;
-import com.esi.conferencemanager.Repositories.UserRepo;
+import com.esi.conferencemanager.Repositories.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.security.Principal;
-import java.security.PrivateKey;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,11 +17,15 @@ import java.util.List;
 public class PaperService {
     private final PaperRepo paperRepo ;
     private final ConferenceRepo conferenceRepo ;
+    private final ReviewRepo reviewRepo;
     private final UserRepo userRepo ;
-    public PaperService(PaperRepo paperRepo, ConferenceRepo conferenceRepo, UserRepo userRepo) {
+    private final AssignmentRepo assignmentRepo;
+    public PaperService(PaperRepo paperRepo, ConferenceRepo conferenceRepo, ReviewRepo reviewRepo, UserRepo userRepo, AssignmentRepo assignmentRepo) {
         this.paperRepo = paperRepo;
         this.conferenceRepo = conferenceRepo;
+        this.reviewRepo = reviewRepo;
         this.userRepo = userRepo;
+        this.assignmentRepo = assignmentRepo;
     }
     public List<Paper> getAllPapers(){
         return paperRepo.findAll();
@@ -33,8 +34,10 @@ public class PaperService {
         return paperRepo.getOne(paper_Id);
     }
     public void  deletePaper(Long paper_Id){
-
-        paperRepo.deleteById(paper_Id);
+        Paper paper = paperRepo.getOne(paper_Id);
+        assignmentRepo.deleteAll(paper.getAssignments());
+       // reviewRepo.deleteAll(paper.getReviews());
+        paperRepo.delete(paper);
     }
     public Paper createPaper(MultipartFile file , Long conference_Id , User author,Paper paper){
         String filename = file.getOriginalFilename();

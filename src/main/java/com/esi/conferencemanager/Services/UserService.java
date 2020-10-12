@@ -1,10 +1,8 @@
 package com.esi.conferencemanager.Services;
 
 import com.esi.conferencemanager.Dto.UserRegistration;
-import com.esi.conferencemanager.Model.Paper;
-import com.esi.conferencemanager.Model.Review;
-import com.esi.conferencemanager.Model.Roles;
-import com.esi.conferencemanager.Model.User;
+import com.esi.conferencemanager.Model.*;
+import com.esi.conferencemanager.Repositories.AssignmentRepo;
 import com.esi.conferencemanager.Repositories.PaperRepo;
 import com.esi.conferencemanager.Repositories.ReviewRepo;
 import com.esi.conferencemanager.Repositories.UserRepo;
@@ -27,14 +25,15 @@ public class UserService implements UserDetailsService {
     private final UserRepo userRepo;
     private final PaperRepo paperRepo ;
     private final ReviewRepo reviewRepo ;
+    private final AssignmentRepo assignmentRepo ;
     @Autowired
     private  BCryptPasswordEncoder passwordEncoder;
 
-    public UserService(UserRepo userRepo, PaperRepo paperRepo, ReviewRepo reviewRepo) {
+    public UserService(UserRepo userRepo, PaperRepo paperRepo, ReviewRepo reviewRepo, AssignmentRepo assignmentRepo) {
         this.userRepo = userRepo;
         this.paperRepo = paperRepo;
         this.reviewRepo = reviewRepo;
-
+        this.assignmentRepo = assignmentRepo;
     }
 
     public Collection<? extends GrantedAuthority> getAuthorities(Roles roles) {
@@ -108,9 +107,17 @@ public class UserService implements UserDetailsService {
         User user = userRepo.getOne(user_id);
         List<Review> reviews = user.getUser_reviews();
         List<Paper> papers = user.getUserPapers();
+
+        user.setPaper_for_reviewing(null);
+        for(Paper p : papers){
+            assignmentRepo.deleteAll(p.getAssignments());
+        }
+
         reviewRepo.deleteAll(reviews);
         paperRepo.deleteAll(papers);
         userRepo.delete(user);
+        assignmentRepo.deleteAll();
+
     }
     public void save(User user) {
         userRepo.save(user);

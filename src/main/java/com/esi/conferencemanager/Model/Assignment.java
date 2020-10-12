@@ -17,7 +17,7 @@ public class Assignment implements Serializable {
     @Id
     @GeneratedValue
     private Long id ;
-    @OneToOne
+    @ManyToOne
     private Paper paper_assigned ;
     @OneToMany
     private List<User> reviewer_assigned ;

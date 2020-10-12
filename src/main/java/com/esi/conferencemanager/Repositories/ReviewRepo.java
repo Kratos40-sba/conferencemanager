@@ -8,5 +8,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ReviewRepo extends JpaRepository<Review,Long> {
-    public Boolean existsByReviewed_paperAndAndReviewer(Paper paper, User reviewer);
+  //  public boolean existsByReviewed_paper(Paper paper);
 }
