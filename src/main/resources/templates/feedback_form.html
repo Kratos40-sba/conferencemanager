@@ -37,24 +37,6 @@
         </table>
     </form>
     <br/>
-    <table border="1" width="90%" align="center" cellpadding="5">
-        <tr>
-            <th>Feedback ID</th>
-            <th>From</th>
-            <th>To</th>
-            <th>Feedback Subject</th>
-            <th>Feedback Message</th>
-            <th>Date</th>
-        </tr>
-        <tr th:each="f: ${feedbacks}">
-            <td th:text="${f.id}"></td>
-            <td th:text="${f.sender}"></td>
-            <td th:text="${f.reciver}"></td>
-            <td th:text="${f.subject}"></td>
-            <td th:text="${f.body}"></td>
-            <td th:text="${f.date}"></td>
-        </tr>
-    </table>
 </div>
 </body>
 </html>
