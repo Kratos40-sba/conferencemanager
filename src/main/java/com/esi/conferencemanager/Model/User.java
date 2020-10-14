@@ -5,10 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
@@ -28,7 +25,7 @@ public class User implements Serializable {
     private String email ;
     @OneToMany(mappedBy = "author")
     private List<Paper> userPapers ;
-    @OneToMany
+    @ManyToMany
     private List<Paper> paper_for_reviewing ;
     @OneToMany(mappedBy = "reviewer")
     private List<Review> user_reviews ;

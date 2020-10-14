@@ -81,7 +81,10 @@ public class PublicController {
 
 
     }
-
+    @GetMapping("/error")
+    public String errResp (){
+        return "err";
+}
 
 
 }

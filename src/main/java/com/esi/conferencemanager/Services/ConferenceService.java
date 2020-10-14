@@ -36,11 +36,17 @@ public class ConferenceService {
         return conferenceRepo.getOne(id);
     }
     public void updateConference(Conference conference){
+        conference.setOpend(true);
         conferenceRepo.save(conference);
     }
     public Conference closeConference(Long conference_Id){
         Conference conference = conferenceRepo.getOne(conference_Id);
-        conference.setOpend(false);
+        if(conference.isOpend()){
+            conference.setOpend(false);
+        }else {
+            conference.setOpend(true);
+        }
+
         return conferenceRepo.save(conference);
     }
 

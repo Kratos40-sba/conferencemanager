@@ -81,7 +81,7 @@
             <td th:text="${conference.opend ? 'Open':'Closed'}"></td>
             <td th:text="${conference.start}"></td>
             <td th:text="${conference.end}"></td>
-            <td> <a th:href=${'/admin/update-conference/'+conference.id}>Edit</a>|<a th:href="${'/admin/delete-conference/'+conference.id}">Delete</a>|<a th:href="${'/admin/close-conference/'+conference.id}">Close</a>
+            <td> <a th:href=${'/admin/update-conference/'+conference.id}>Edit</a>|<a th:href="${'/admin/delete-conference/'+conference.id}">Delete</a>|<a th:href="${'/admin/close-conference/'+conference.id}">Change status</a>
             </td>
         </tr>
     </table>

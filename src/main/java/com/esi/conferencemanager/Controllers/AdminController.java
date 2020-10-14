@@ -27,7 +27,9 @@ public class AdminController {
         this.assignmentService = assignmentService;
     }
     @GetMapping("/users-list")
-    public String getUsers(Model model){
+    public String getUsers(Model model , Principal principal){
+        User current = userService.getByEmail(principal.getName());
+        model.addAttribute("curr",current.getId());
         model.addAttribute("users",userService.getAllUsers());
         return "users";
     }
@@ -138,17 +140,17 @@ public class AdminController {
         return "paper_revewers";
     }
     @PostMapping("/papers-reviewers/{paper_id}")
-    public String createAssignment (@PathVariable("paper_id") Long id ,@RequestParam(value = "revs" , required = true) List<Long> reviewers_id){
+    public String createAssignment (@PathVariable("paper_id") Long id ,@RequestParam(value = "revs" , required = true) List<Long> reviewers_id ){
         assignmentService.createAssigment(id,reviewers_id,new Assignment());
         return "redirect:/admin/papers-submitted";
 
 
     }
-
-    @GetMapping("/show-papers-accepted/{conf_id}")
-    public String GetAcceptedPapers(@PathVariable("conf_id") Long conf_id , Model model){
-
-        return "";
+    @GetMapping("/assignements")
+    public String getAssignments(Model model){
+        List<Assignment> assignments = assignmentService.assignmentList();
+        model.addAttribute("asgmnts",assignments);
+        return "assignments";
     }
 
 

@@ -34,7 +34,7 @@ public class FeedbackService {
         feedback.setSender(userRepo.findByEmail(principal.getName()).getEmail());
         feedback.setDate(LocalDateTime.now());
         feedback.setSubject("Paper-Status");
-        feedback.setBody("Your paper have been accepted");
+        feedback.setBody("Your paper have been accepted "+ "paper ID : " + paper.getId());
         feedbackRepo.save(feedback);
 
     }
@@ -45,7 +45,7 @@ public class FeedbackService {
         feedback.setSender(userRepo.findByEmail(principal.getName()).getEmail());
         feedback.setDate(LocalDateTime.now());
         feedback.setSubject("Paper-Status");
-        feedback.setBody("Your paper have been refused");
+        feedback.setBody("Your paper have been refused " + "paper ID : " + paper.getId());
         feedbackRepo.save(feedback);
 
     }

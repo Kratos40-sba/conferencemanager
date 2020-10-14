@@ -30,7 +30,7 @@
                 <div sec:authorize="hasRole('AUTHOR')">
                 <a th:href="${'/author/create-paper/'+conference.id}">Submit Paper</a>
                 </div>
-                <div sec:authorize="hasRole('REVIEWER')">
+                <div sec:authorize="hasRole('ADMIN')">
                 <a th:href="${'/admin/papers-conference/'+conference.id}">View Papers</a>
                 </div>
             </td>

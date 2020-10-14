@@ -35,7 +35,7 @@ public class PaperService {
     }
     public void  deletePaper(Long paper_Id){
         Paper paper = paperRepo.getOne(paper_Id);
-        assignmentRepo.deleteAll(paper.getAssignments());
+       // assignmentRepo.deleteAll(paper.getAssignments());
        // reviewRepo.deleteAll(paper.getReviews());
         paperRepo.delete(paper);
     }

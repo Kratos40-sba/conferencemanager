@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <link th:href="@{/main.css}" type="text/css" rel="stylesheet" />
+    <title>Assignments List</title>
+</head>
+<body>
+<div th:insert="menu"></div>
+<div class="main">
+    <div th:insert="header"></div>
+    <table border="1" width="90%" align="center" cellpadding="5">
+        <tr>
+            <th>Assignement ID</th>
+            <th>Assignement Date</th>
+            <th>Paper ID</th>
+            <th>Paper Title</th>
+            <th>Paper Author</th>
+        </tr>
+        <tr th:each="a: ${asgmnts}">
+            <td th:text="${a.id}"></td>
+            <td th:text="${a.assignement_date}"></td>
+            <td th:text="${a.paper_assigned.id}"></td>
+            <td th:text="${a.paper_assigned.titre}"></td>
+        </tr>
+    </table>
+
+</div>
+</body>
+</html>

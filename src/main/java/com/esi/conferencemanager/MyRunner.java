@@ -1,6 +1,7 @@
 package com.esi.conferencemanager;
 
 import com.esi.conferencemanager.Dto.UserRegistration;
+import com.esi.conferencemanager.Model.Conference;
 import com.esi.conferencemanager.Model.Roles;
 import com.esi.conferencemanager.Model.User;
 import com.esi.conferencemanager.Services.ConferenceService;

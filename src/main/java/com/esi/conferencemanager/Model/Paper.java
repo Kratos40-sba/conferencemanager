@@ -33,11 +33,8 @@ public class Paper implements Serializable {
     private Conference conference ;
     @ManyToOne
     private User author ;
-    @OneToMany(mappedBy = "paper_assigned")
-    private List<Assignment> assignments ;
     @OneToMany(mappedBy = "reviewed_paper" )
     private List<Review> reviews ;
-
     public Paper(String fileName , String fileType , byte[] data){
         this.fileName = fileName ;
         this.fileType = fileType ;

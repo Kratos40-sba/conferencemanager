@@ -17,10 +17,11 @@ public class Assignment implements Serializable {
     @Id
     @GeneratedValue
     private Long id ;
-    @ManyToOne
+    @OneToOne
     private Paper paper_assigned ;
     @OneToMany
     private List<User> reviewer_assigned ;
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     private LocalDateTime assignement_date ;
+
 }

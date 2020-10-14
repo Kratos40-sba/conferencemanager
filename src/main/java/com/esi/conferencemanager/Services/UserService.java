@@ -64,7 +64,7 @@ public class UserService implements UserDetailsService {
         user.setRole(Roles.ROLE_AUTHOR);
         user.setUserPapers(null);
         user.setUser_reviews(null);
-        user.setPaper_for_reviewing(null);
+       // user.setPaper_for_reviewing(null);
         user.setFeedbacks(null);
         return userRepo.save(user) ;
     }
@@ -108,10 +108,10 @@ public class UserService implements UserDetailsService {
         List<Review> reviews = user.getUser_reviews();
         List<Paper> papers = user.getUserPapers();
 
-        user.setPaper_for_reviewing(null);
-        for(Paper p : papers){
+      //  user.setPaper_for_reviewing(null);
+       /* for(Paper p : papers){
             assignmentRepo.deleteAll(p.getAssignments());
-        }
+        }*/
 
         reviewRepo.deleteAll(reviews);
         paperRepo.deleteAll(papers);
